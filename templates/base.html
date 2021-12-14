@@ -1,0 +1,37 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <!-- <link rel="icon" href="/favicon.ico" sizes="any"> -->
+
+  <!-- <link rel="apple-touch-icon" href="icon.png"> -->
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+
+  <!-- <meta name="theme-color" content="#fafafa"> -->
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <a href='/'>
+  <img src="{{ url_for('static', filename='/images/index.png') }}" class='center'>
+</a>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

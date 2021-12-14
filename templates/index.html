@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+  <div class='background2'>
+  <h2><small style='color: black;'>1. Segmentation with a trained weka model</small></h2>
+  <div>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+  <form enctype="multipart/form-data" method="POST" action="/">
+    <h3>Options</h3>
+    <div class="background">  
+    <div>
+    <label>Feature Model Table</label>
+    <input accept='.txt' type="file", name='FMT', id='FMT'>
+</div>
+<div>
+    <label>Trained Weka Model</label>
+    <input accept='.model' type="file", name='model', id='model'>
+</div>
+<div>
+    <label>Number of Model Classes</label>
+    <input type="number", name='channels', id='channels' onchange="updateGroup()">
+</div>
+
+<div>
+    <label>Image Stacks to Segment</label>
+    <input accept='.tiff, .tif' type="file", name='stack', id='stack' multiple>
+</div>
+
+<div>
+    <label>Generate Probability Maps</label>
+    <input type="checkbox", name='probmap', id='probmap'>
+</div>
+
+</div>
+
+<div onclick='show("advanced")' style='cursor: pointer'>
+<a><h3 id='titleA'>Advanced <b>(+)</b></h3></a>
+</div>
+<div style='display: none' id='advanced' name='advanced'>
+<div class='background'>
+    <div>
+        <label>xy pixel size (nm)</label>
+        <input type='number' value='104', name='xy', id='xy'>
+    
+    </div>
+    <div>
+        <label>z pixel size (nm)</label>
+        <input type='number' value='268.14', name='z', id='z'>
+
+    <div>
+        <label>Intensity Scaling Factor</label>
+        <input type='number' value='1.0', step='0.01', name='ISF', id='ISF'>
+    </div>
+    <div>
+        <label>Intensity Scaling Factor Multiplier Over Time</label>
+        <input type='number' value='1.0', step='0.01', name='ISFT', id='ISFT'>
+    </div>
+
+    <div>
+        <label>Cropbox</label>
+        <input type='text' value='', name='crop', id='crop'>
+    </div>
+
+    <div>
+        <label>Channel Grouping</label>
+        <input type='text' value='', name='group', id='group'>
+    </div>   
+
+</div>
+</div>
+</div>
+
+<script>
+    function show(id){
+        container = document.getElementById(id);
+        tag = document.getElementById('titleA');
+        if (container.style.display == 'none') {
+            container.style.display = 'block';
+            tag.innerHTML = 'Advanced <b>(-)</b>';
+        }
+        else {
+            container.style.display = 'none';
+            tag.innerHTML = 'Advanced <b>(+)</b>';
+        }
+
+    }
+    </script>
+
+<script>
+    function updateGroup(){
+        
+        channels = document.getElementById('channels');
+        const numchannels = parseInt(channels.value);
+
+        const channel_grouping = [];
+        for (let i = 0; i < numchannels; i++)
+            channel_grouping[i] = [i]
+        groups = document.getElementById('group');
+        groups.value = channel_grouping;
+    }
+</script>
+<div class='background'>
+    <input type="submit" value='Perform Segmentation'>
+  </form>
+  
+</div>
+
+    {% if images != [] %}
+    
+    <div class='output'>
+    <h2> <small style="color: azure;">Recent Outputs </small></h2>
+    {% for i in images %}
+    <a href='{{i}}'>{{i[i.rfind("/")+1:]}}</a> <br>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

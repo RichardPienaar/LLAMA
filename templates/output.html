@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+<meta http-equiv="refresh" content="5;url=/output">
+{% endblock %}
+
+{% block content %}
+  <div class='background2'>
+  <h2><small style='color: black;'>Semantic Segmentation in progress - Please wait.</small></h2>
+  <div>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{{ progress }}
+
+</div>
+{% endblock %}
