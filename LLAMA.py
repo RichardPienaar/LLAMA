@@ -1,3 +1,8 @@
+####
+# Richard Pienaar
+# Full stack web applicaiton for LLAMA - https://github.com/jameslefevre/4D-microscopy-pipeline
+####
+
 import os, subprocess
 from subprocess import PIPE
 from flask import Flask, render_template, request, redirect, flash, url_for, send_from_directory, Markup
@@ -31,7 +36,7 @@ app.config['IMAGE_STACK_NAME'] = "image_"
 
 def get_save_features(feature_model_table,image,modelname,xy_,z_,adjusted_intensity,crop):
     '''
-    Performs Step 1a, generating and wriitng featiures to disk. Makes shell call to Fiji. 
+    Performs Step 1a, generating and wriitng featiures to disk. Makes shell call to Fiji (generate_save_features.groovy). 
 
     Parameters are parsed in the form submitted to the index route
 
@@ -48,7 +53,7 @@ def get_save_features(feature_model_table,image,modelname,xy_,z_,adjusted_intens
 
 def apply_classifer(feature_model_table,real_names,count,modelname,xy_,z_,channels,image):
     '''
-    Performs Step 1b, apply a .model classifer to image stack. Makes shell call to Fiji
+    Performs Step 1b, apply a .model classifer to image stack. Makes shell call to Fiji (apply_classifiers.groovy).
 
     Parameters are parsed in the form submitted to the index route
 
@@ -82,7 +87,7 @@ def segment(feature_model_table,modelname,xy_,z_,crop,real_names,channels,ISF,IS
 
 def reset():
     '''
-    helper to delete client uplaods and reset before handling the next request
+    helper to delete client uploads and reset before handling the next request
     '''
     # clear directorys
     for dir in ['table', 'models', 'data']:
@@ -302,4 +307,3 @@ def out_pb(filename):
 if __name__ == "__main__":
     # change before prod
     app.run(host='0.0.0.0', port=5000, debug=True)
-
