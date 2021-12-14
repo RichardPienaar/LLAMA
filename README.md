@@ -4,7 +4,7 @@
 ### Available at: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8375126/ 
 ### Repo: https://github.com/jameslefevre/4D-microscopy-pipeline
 
-<p> The original pipeline is incredible, but requires manual setting of arguments to scripts. This application would provide server logic to allow anyone to run LLAMA on their lattice light sheet data. It works by using Python / Flask to collect user inputs and execute them as shell arguments with the bundled Fiji (Image-J) install. Currently only handles step 1, Semantic Segmentation. User data is paertially validated on the client and server sides. Tested on Linux. </p>
+<p> The original pipeline is incredible, but requires manual setting of arguments to scripts. This application would provide server logic to allow anyone to run LLAMA on their lattice light sheet data. It works by using Python / Flask to collect user inputs and execute them as shell arguments with the bundled Fiji (Image-J) install. Currently only handles step 1, Semantic Segmentation. User data is partially validated on the client and server sides. Tested on Ubuntu 18. </p>
 
 <img src='llama.png' alt='LLAMA User Interface'>
 
